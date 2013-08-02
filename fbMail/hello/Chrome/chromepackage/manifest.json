@@ -1,0 +1,9 @@
+{
+  "name": "MailPlugin",
+  "version": "${FBSTRING_PLUGIN_VERSION}",
+  "description": "mail plugin",
+
+	"plugins": [
+    { "path": "nphello.dll", "public": true }
+  ]
+}
