@@ -6,7 +6,7 @@
 - git remote add origin https://github.com/iie5Group/mailGroup.git  
 - git commit -m "first commit"  
 - git push -u origin master  
-
+- git pull origin master  
 - git config --global user.name "xxx"
 - git config --global user.email xxx@gmail.com
 
