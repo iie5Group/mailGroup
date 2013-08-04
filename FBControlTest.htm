@@ -1,0 +1,286 @@
+<!--
+    Auto-generated test-site
+-->
+<html>
+<head>
+    <title>test page for object fbcontrol</title>
+    <style type="text/css">
+    body
+    {
+    	width:1080px;
+    	height:1920px;
+    	margin:0px auto;
+    	background-color:white;
+    }
+	#plugin0
+	{
+		visibility:hidden;
+	}
+	
+	#main
+	{
+		background-color:#E0E0E0;
+		width=720px;
+		height=1280px;
+		margin:0 auto;
+	}
+	.RegionDiv
+	{
+		background-color:#C9C9C9;
+		width:98%;
+		margin:5 auto;	
+		border-style:dashed;
+	}
+	#BaseAPISamples
+	{
+		height:280px;
+	}
+	
+	#ThreadDiv
+	{
+		height:600px;
+	}
+	.FilesList
+	{
+		background-color:#C9C9C9;
+		text-indent: 2em;
+		width:98%;
+		margin:5 auto;
+	}
+	#FilesNameList
+	{
+		width:98%;
+		margin:5 auto;
+	}
+    </style>
+    
+     <script type="text/javascript">
+        function plugin0()
+        {
+            return document.getElementById('plugin0');
+        }
+        plugin = plugin0;
+        function addEvent(obj, name, func)
+        {
+            if (obj.attachEvent) {
+                obj.attachEvent("on"+name, func);
+            } else {
+                obj.addEventListener(name, func, false); 
+            }
+        }
+        
+        function load()
+        {
+            addEvent(plugin(), 'test', function(){
+                alert("Received a test event from the plugin.")
+            });
+        }
+        function pluginLoaded() {
+            alert("Plugin loaded!");
+        }
+        
+        function addTestEvent()
+        {
+            addEvent(plugin(), 'echo', function(txt,count){
+                alert(txt+count);
+            });
+        }
+        
+        function testEvent()
+        {
+            plugin().testEvent();
+        }
+        
+        function pluginValid()
+        {
+            if(plugin().valid){
+                alert(plugin().echo("This plugin seems to be working!"));
+            } else {
+                alert("Plugin is not working :(");
+            }
+        }
+
+		function testChooseFile()
+		{
+			var filename = plugin().chooseFile();
+			var length = filename.length;
+			var fObj = document.getElementById("FilesNameDiv");
+			var divHeight = document.getElementById("FilesSelectSave").offsetHeight;
+
+			document.getElementById("FilesSelectSave").style.height = divHeight + length*19;
+
+			for(var i = 0; i < length; i++)
+			{
+				var newLabel = document.createElement("label");
+				var newBr = document.createElement("br");
+				newLabel.innerHTML = filename[i];
+				newLabel.appendChild(newBr);
+				fObj.appendChild(newLabel);
+			}
+			document.getElementById("FilesNameDiv").style.display = "block";
+		}
+		
+		function testSaveFile()
+		{
+			var filename = plugin().savePathSelect();
+			document.getElementById("FileSavePath").innerHTML = filename;
+			document.getElementById("SavePathDiv").style.display = "block";
+		}
+		
+		function testDownloadUrl()
+		{
+			var strUrl = document.getElementById("TargetUrlInput").value;
+			plugin().testSaveHtml(strUrl);
+		}
+    </script>
+</head>
+   
+<body onload="load()">
+
+<div id="main">
+	<object id="plugin0" width="0" height="0" type="application/x-pluginemailclient">
+	    <param name="onload" value="pluginLoaded" />
+	</object>
+	
+	<div id="BaseAPISamples" class="RegionDiv">
+		<label>基本API调用示例：</label> <br /> 
+		<ol>
+			<li>
+				<label>Method:</label>
+				<label>触发控件中一个Method类型函数 --</label>
+				<a href="#" onclick="">Click here!</a>
+			</li>
+			<li>
+				<label>Events:</label>
+				<label>触发控件中一个Events类型函数 --</label>
+				<a href="#" onclick="">Click here!</a>
+			</li>
+			<li>
+				<label>Properties:</label><br />
+				<div style="text-indent: 2em;">
+				
+					<div>
+						<label" >Read Only Properties --</label> <br/>
+					</div>
+					<div style="text-indent: 4em;">
+						<label>输出控件中Read-Only Properties类型值 --</label>
+						<a href="#" onclick="">Click here!</a>
+					</div>
+					
+					<div>
+						<label" >Read/Write Properties --</label> <br/>
+					</div>
+					<div style="text-indent: 4em;">
+						<label>设置控件中Properties类型值，并在网页中输出 --</label>
+						<input type="text" id="PropertiesTextbox" style="width:80;overflow-x:visible;" />&nbsp;&nbsp;<a href="#" onclick="">Click here!</a>
+					</div>
+				</div>	
+			</li>
+			<li>
+				<label>Attributes:</label><br />
+				<div style="text-indent: 2em;">
+				
+					<div>
+						<label" >Read Only Attributes --</label> <br/>
+					</div>
+					<div style="text-indent: 4em;">
+						<label>输出控件中Read-Only Attributes类型值 --</label>
+						<a href="#" onclick="">Click here!</a>
+					</div>
+					
+					<div>
+						<label" >Read/Write Attributes --</label> <br/>
+					</div>
+					<div style="text-indent: 4em;">
+						<label >设置控件中Attributes类型值，并在网页中输出 --</label>
+						<input type="text" id="AttributesTextbox" style="width:80;overflow-x:visible;" />&nbsp;&nbsp;<a href="#" onclick="">Click here!</a>
+					</div>
+				</div>
+			</li>
+		</ol>
+	</div>
+	
+	<div id="FilesSelectSave" class="RegionDiv" style="height:150;">
+		<label>插件调用GTK 选择/保存 文件示例(获取并显示文件路径)：</label> <br /> 
+		<ol>
+			<li>
+				<label>调用GTK选择上传文件:</label>
+				<a href="#" onclick="javascript:testChooseFile()">Click here!</a>
+				<div id="FilesNameDiv" style="display:none;">
+				</div>
+			</li>
+			<li>
+				<label>调用GTK选择文件保存路径:</label>
+				<a href="#" onclick="javascript:testSaveFile()">Click here!</a>
+				<div id="SavePathDiv" style="display:none;">
+					<label id="FileSavePath" ></label>
+				</div>
+			</li>
+		</ol>
+	</div>
+	
+	<div id="FilesUpAndDownload" class="RegionDiv" style="height:120px;">
+		<label>插件 上传/下载 文件（libcurl开源库使用示例）：</label> <br /> 
+		<ol>
+			<li>
+				<label>调用GTK选择上传文件，并上传至服务器:</label>
+				<a href="#" onclick="javascript:testUploadFile()">Click here!</a>
+			</li>
+			<li>
+				<label>调用GTK选择文件保存路径，并下载一个文件:</label><br/>
+				<label>要下载的网页url：</label>
+				<input type="text" id="TargetUrlInput" />
+				<a href="#" onclick="javascript:testDownloadUrl()">Click here!</a>
+			</li>
+		</ol>
+	</div>
+	
+	<div id="ThreadDiv" class="RegionDiv">
+		<label>插件创建线程示例：</label> <br /> 
+		<ol>
+			<li>
+				<label>创建线程运行带拥有不同参数个数的实体函数:</label><br />
+				<div style="text-indent: 2em;">
+				
+					<div>
+						<label" >None-param --</label>
+						<a href="#" onclick="">Click here!</a>
+					</div>
+					<div>
+						<label" >One-param  --</label>
+						<a href="#" onclick="">Click here!</a>
+					</div>
+					<div>
+						<label" >Multi-param --</label>
+						<a href="#" onclick="">Click here!</a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<label>创建线程运行带拥有不同参数个数的实体函数:</label><br />
+				<div style="text-indent: 2em;">
+				
+					<div>
+						<label" >None-param --</label>
+						<a href="#" onclick="">Click here!</a>
+					</div>
+					<div>
+						<label" >One-param  --</label>
+						<a href="#" onclick="">Click here!</a>
+					</div>
+					<div>
+						<label" >Multi-param --</label>
+						<a href="#" onclick="">Click here!</a>
+					</div>
+				</div>
+			</li>
+		</ol>
+	</div>
+	<a href="#" onclick="javascript:pluginValid()">Click me!</a> <br />
+	<a href="#" onclick="javascript:addTestEvent()">Activate click counter</a> <br />
+	<a href="#" onclick="javascript:testChooseFile()">Choose A File</a> <br />
+	<a href="#" onclick="javascript:testEvent()">Fire a test event</a> <br />
+</div>
+
+</body>
+</html>
